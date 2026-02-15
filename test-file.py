@@ -1,10 +1,16 @@
 import requests
 import pprint
 
-params = '''{User-Agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"}'''
-
-response = requests.post("https://httpbin.org/post", params=params)
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+}
+payload = {
+  "device": "NanoPi R4S",
+  "mode": "vpn",
+  "active": True
+}
+response = requests.post("https://httpbin.org/post", headers=headers, json=payload)
 print(response.status_code)
-pprint.pprint(response.content)
+pprint.pprint(response.json())
 print("\n")
 print(response.request.headers)
